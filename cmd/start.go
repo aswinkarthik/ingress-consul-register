@@ -15,10 +15,11 @@
 package cmd
 
 import (
-	"io"
 	"log"
-	"net/http"
 
+	"github.com/aswinkarthik93/ingress-consul-register/pkg/api"
+	"github.com/aswinkarthik93/ingress-consul-register/pkg/config"
+	"github.com/aswinkarthik93/ingress-consul-register/pkg/engine"
 	"github.com/spf13/cobra"
 )
 
@@ -49,15 +50,17 @@ func init() {
 
 	// Cobra supports local flags which will only run when this command
 	// is called directly, e.g.:
-	// startCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
-}
-
-func ping(w http.ResponseWriter, r *http.Request) {
-	io.WriteString(w, "pong")
+	startCmd.Flags().StringVarP(&config.Cfg.IngressClass, "ingress-class", "i", "nginx", "Ingress class to watch for")
 }
 
 func runStart() {
-	mux := http.NewServeMux()
-	mux.HandleFunc("/ping", ping)
-	log.Fatal(http.ListenAndServe(":8080", mux))
+	if err := engine.Initialize(); err != nil {
+		log.Fatal(err)
+	}
+
+	go engine.RunOnce()
+
+	go engine.StartWatching()
+
+	api.StartServer()
 }
