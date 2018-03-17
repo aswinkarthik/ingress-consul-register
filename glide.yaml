@@ -1,0 +1,7 @@
+package: github.com/aswinkarthik93/ingress-consul-register
+import:
+- package: github.com/mitchellh/go-homedir
+- package: github.com/spf13/cobra
+  version: ^0.0.1
+- package: github.com/spf13/viper
+  version: ^1.0.0
