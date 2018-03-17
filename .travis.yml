@@ -1,0 +1,10 @@
+language: go
+
+go:
+  - 1.9.2
+
+script:
+  - curl https://glide.sh/get | sh
+  - glide install
+  - go test $(glide novendor) -v
+  - go build
