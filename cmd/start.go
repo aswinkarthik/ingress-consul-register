@@ -51,6 +51,9 @@ func init() {
 	// Cobra supports local flags which will only run when this command
 	// is called directly, e.g.:
 	startCmd.Flags().StringVarP(&config.Cfg.IngressClass, "ingress-class", "i", "nginx", "Ingress class to watch for")
+	startCmd.Flags().StringVarP(&config.Cfg.ConsulDomain, "consul-domain", "d", "consul", "Domain with which consul is configured")
+	startCmd.Flags().StringVar(&config.Cfg.ControllerService, "ingress-controller-service", "", "Ingress controller service that is configured for the ingress-class")
+	startCmd.Flags().StringVar(&config.Cfg.ControllerServiceNamespace, "ingress-controller-service-namespace", "default", "Namespace of the ingress controller")
 }
 
 func runStart() {
