@@ -6,6 +6,7 @@ import (
 	"github.com/aswinkarthik93/ingress-consul-register/pkg/config"
 	"github.com/ericchiang/k8s/apis/extensions/v1beta1"
 	v1 "github.com/ericchiang/k8s/apis/meta/v1"
+	"github.com/hashicorp/consul/api"
 	"github.com/stretchr/testify/assert"
 )
 
@@ -34,4 +35,20 @@ func TestRetrieveTags(t *testing.T) {
 	expectedTags := []string{"payment", "ticket"}
 
 	assert.Equal(t, expectedTags, actualTags)
+}
+
+func TestConsulServiceAgentServiceRegistration(t *testing.T) {
+	c := &consulService{
+		Name:      "internal",
+		Tags:      []string{"payment", "ticket"},
+		IpAddress: "10.14.55.2",
+	}
+	expected := &api.AgentServiceRegistration{
+		ID:      "internal",
+		Name:    "internal",
+		Tags:    []string{"payment", "ticket"},
+		Address: "10.14.55.2",
+	}
+
+	assert.Equal(t, expected, c.agentServiceRegistration())
 }

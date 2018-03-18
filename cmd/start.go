@@ -39,6 +39,8 @@ func init() {
 
 	startCmd.Flags().StringVarP(&config.Cfg.IngressClass, "ingress-class", "i", "nginx", "Ingress class to watch for")
 	startCmd.Flags().StringVarP(&config.Cfg.ConsulDomain, "consul-domain", "d", "consul", "Domain with which consul is configured")
+	startCmd.Flags().StringVarP(&config.Cfg.ConsulHost, "consul-host", "h", "127.0.0.1", "Hostname/IP Address of consul agent to which service should be registered")
+	startCmd.Flags().IntVarP(&config.Cfg.ConsulPort, "consul-port", "p", 8500, "Port of consul agent's HTTP interface")
 	startCmd.Flags().StringVar(&config.Cfg.ConsulControllerService, "consul-controller-service", "controller", "ServiceName with which the ingress controller should be registered with Consul")
 	startCmd.Flags().StringVar(&config.Cfg.ControllerService, "ingress-controller-service", "", "Ingress controller service that is configured for the ingress-class")
 	startCmd.Flags().StringVar(&config.Cfg.ControllerServiceNamespace, "ingress-controller-service-namespace", "default", "Namespace of the ingress controller")

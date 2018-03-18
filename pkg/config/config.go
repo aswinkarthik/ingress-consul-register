@@ -8,6 +8,8 @@ type Config struct {
 	ControllerService          string
 	ControllerServiceNamespace string
 	ConsulControllerService    string
+	ConsulHost                 string
+	ConsulPort                 int
 }
 
 var Cfg Config
@@ -34,4 +36,12 @@ func ControllerServiceNamespace() string {
 
 func ConsulControllerService() string {
 	return Cfg.ConsulControllerService
+}
+
+func ConsulHost() string {
+	return Cfg.ConsulHost
+}
+
+func ConsulPort() int {
+	return Cfg.ConsulPort
 }

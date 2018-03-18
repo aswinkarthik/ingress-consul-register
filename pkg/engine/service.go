@@ -10,7 +10,7 @@ import (
 )
 
 type controllerService struct {
-	service v1.Service
+	service *v1.Service
 }
 
 func fetchControllerService() *controllerService {
@@ -25,7 +25,7 @@ func fetchControllerService() *controllerService {
 		log.Fatal(err)
 	}
 
-	return &controllerService{service}
+	return &controllerService{&service}
 }
 
 func (s *controllerService) getIpAddress() string {
@@ -33,4 +33,8 @@ func (s *controllerService) getIpAddress() string {
 		return ipaddress
 	}
 	return s.service.GetSpec().GetClusterIP()
+}
+
+func (s *controllerService) getName() string {
+	return *s.service.GetMetadata().Name
 }
