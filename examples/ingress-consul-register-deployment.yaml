@@ -23,6 +23,8 @@ spec:
           - start
           - --ingress-class
           - nginx-internal
+          - --consul-controller-service
+          - internal
         imagePullPolicy: IfNotPresent
         name: ingress-consul-register
         resources: {}
