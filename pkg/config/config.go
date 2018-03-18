@@ -7,6 +7,7 @@ type Config struct {
 	ConsulDomain               string
 	ControllerService          string
 	ControllerServiceNamespace string
+	ConsulControllerService    string
 }
 
 var Cfg Config
@@ -20,5 +21,17 @@ func IngressClass() string {
 }
 
 func ConsulDomain() string {
-	return fmt.Sprintf(".%s.%s", "consul", Cfg.ConsulDomain)
+	return fmt.Sprintf(".%s.%s", "service", Cfg.ConsulDomain)
+}
+
+func ControllerService() string {
+	return Cfg.ControllerService
+}
+
+func ControllerServiceNamespace() string {
+	return Cfg.ControllerServiceNamespace
+}
+
+func ConsulControllerService() string {
+	return Cfg.ConsulControllerService
 }
