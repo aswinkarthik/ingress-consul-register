@@ -1,6 +1,14 @@
 package: github.com/aswinkarthik93/ingress-consul-register
 import:
 - package: github.com/mitchellh/go-homedir
+- package: github.com/spf13/cobra
+  vcs: git
+  version: master
+  repo: https://github.com/spf13/cobra.git
+- package: github.com/spf13/pflag
+  vcs: git
+  version: master
+  repo: https://github.com/spf13/pflag.git
 - package: github.com/spf13/viper
   version: ^1.0.0
 - package: github.com/ericchiang/k8s

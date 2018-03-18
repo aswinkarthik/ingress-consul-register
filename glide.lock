@@ -1,5 +1,5 @@
-hash: 73f7009f102e7923b541a0446ac151fe214670da3ead3e6d10fc737c8e001fed
-updated: 2018-03-17T22:09:40.020222+05:30
+hash: ca4ba2aceeeaeb014ab8911ea1c514de60a5175e8741116dcae1c42a32e6c5cc
+updated: 2018-03-18T11:01:24.076971+05:30
 imports:
 - name: github.com/ericchiang/k8s
   version: 5912993f00cb7c971aaa54529a06bd3eecd6c3d4
@@ -48,11 +48,15 @@ imports:
 - name: github.com/spf13/cast
   version: acbeb36b902d72a7a4c18e8f3241075e7ab763e4
 - name: github.com/spf13/cobra
-  version: 7b2c5ac9fc04fc5efafb60700713d4fa609b777b
+  version: c6c44e6fdcc30161c7f4480754da7230d01c06e3
+  repo: https://github.com/spf13/cobra.git
+  vcs: git
 - name: github.com/spf13/jwalterweatherman
   version: 7c0cea34c8ece3fbeb2b27ab9b59511d360fb394
 - name: github.com/spf13/pflag
-  version: 9ff6c6923cfffbcd502984b8e0c80539a94968b7
+  version: ee5fd03fd6acfd43e44aea0b4135958546ed8e73
+  repo: https://github.com/spf13/pflag.git
+  vcs: git
 - name: github.com/spf13/viper
   version: 25b30aa063fc18e48662b86996252eabdcf2f0c7
 - name: github.com/stretchr/testify
