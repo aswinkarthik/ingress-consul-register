@@ -1,5 +1,5 @@
-hash: ca4ba2aceeeaeb014ab8911ea1c514de60a5175e8741116dcae1c42a32e6c5cc
-updated: 2018-03-18T11:01:24.076971+05:30
+hash: 02b2346f2cc5f21d19c7f275cf30a6491b0b6ffdd31f29ba76a78acded110c6b
+updated: 2018-03-18T12:49:19.951575+05:30
 imports:
 - name: github.com/ericchiang/k8s
   version: 5912993f00cb7c971aaa54529a06bd3eecd6c3d4
@@ -20,6 +20,8 @@ imports:
   version: 1643683e1b54a9e88ad26d98f81400c8c9d9f4f9
   subpackages:
   - proto
+- name: github.com/hashicorp/consul
+  version: 9a494b5fb9c86180a5702e29c485df1507a47198
 - name: github.com/hashicorp/hcl
   version: 23c074d0eceb2b8a5bfdbb271ab780cde70f05a8
   subpackages:
