@@ -20,7 +20,7 @@ func RunOnce() {
 	ingresses := fetchIngresses()
 	tags := retrieveTags(ingresses)
 	service := fetchControllerService()
-	c := &consulService{Tags: tags, IpAddress: service.getIpAddress()}
+	c := &consulService{Tags: tags, IpAddress: service.getIpAddress(), Name: config.ConsulControllerService()}
 	log.Println("Following service will be registered in consul")
 	utils.PrettyPrint(c)
 	c.registerToConsul(consulClient)
@@ -31,6 +31,7 @@ func retrieveTags(ingresses []*v1beta1.Ingress) []string {
 }
 
 func (c *consulService) registerToConsul(client *api.Client) error {
+	utils.PrettyPrint(c.agentServiceRegistration())
 	if err := client.Agent().ServiceRegister(c.agentServiceRegistration()); err != nil {
 		log.Println("An error occurred when registering to consul")
 		log.Println(err)

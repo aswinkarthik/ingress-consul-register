@@ -27,6 +27,8 @@ spec:
           - internal
           - --ingress-controller-service
           - router-nginx-ingress-controller
+          - --consul-host
+          - dns-consul
         imagePullPolicy: IfNotPresent
         name: ingress-consul-register
       dnsPolicy: ClusterFirst

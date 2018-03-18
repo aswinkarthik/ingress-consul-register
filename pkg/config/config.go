@@ -10,6 +10,7 @@ type Config struct {
 	ConsulControllerService    string
 	ConsulHost                 string
 	ConsulPort                 int
+	ApiPort                    int
 }
 
 var Cfg Config
@@ -44,4 +45,8 @@ func ConsulHost() string {
 
 func ConsulPort() int {
 	return Cfg.ConsulPort
+}
+
+func ApiPort() int {
+	return Cfg.ApiPort
 }
