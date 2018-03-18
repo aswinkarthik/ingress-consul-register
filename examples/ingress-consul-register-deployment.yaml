@@ -25,11 +25,10 @@ spec:
           - nginx-internal
           - --consul-controller-service
           - internal
+          - --ingress-controller-service
+          - router-nginx-ingress-controller
         imagePullPolicy: IfNotPresent
         name: ingress-consul-register
-        resources: {}
-        terminationMessagePath: /dev/termination-log
-        terminationMessagePolicy: File
       dnsPolicy: ClusterFirst
       restartPolicy: Always
       schedulerName: default-scheduler

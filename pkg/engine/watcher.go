@@ -13,6 +13,8 @@ func RunOnce() {
 	ingresses := fetchIngresses()
 	tags := retrieveTags(ingresses)
 	utils.PrettyPrint(tags)
+	service := fetchControllerService()
+	utils.PrettyPrint(service)
 }
 
 func retrieveTags(ingresses []*v1beta1.Ingress) []string {
