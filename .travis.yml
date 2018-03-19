@@ -5,6 +5,5 @@ go:
 
 script:
   - curl https://glide.sh/get | sh
-  - glide install
-  - go test $(glide novendor) -v
-  - go build
+  - make test
+  - make build
