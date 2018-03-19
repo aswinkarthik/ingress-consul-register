@@ -16,7 +16,7 @@ type consulService struct {
 }
 
 func RunOnce() {
-	log.Println("Initiating first run")
+	log.Println("Initiating run")
 	ingresses := fetchIngresses()
 	tags := retrieveTags(ingresses)
 	service := fetchControllerService()
@@ -40,8 +40,14 @@ func (c *consulService) registerToConsul(client *api.Client) error {
 	return nil
 }
 
-func StartWatching() {
-	log.Println("Start watching")
+func StartWatchingIngress() {
+	log.Println("Starting ingress watcher")
+	watchIngress(RunOnce)
+}
+
+func StartWatchingService() {
+	log.Println("Starting service watcher")
+	watchService(RunOnce)
 }
 
 func (c *consulService) agentServiceRegistration() *api.AgentServiceRegistration {

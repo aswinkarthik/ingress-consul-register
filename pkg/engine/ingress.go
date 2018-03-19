@@ -2,6 +2,8 @@ package engine
 
 import (
 	"context"
+	"fmt"
+	"log"
 
 	"github.com/aswinkarthik93/ingress-consul-register/pkg/config"
 	"github.com/ericchiang/k8s"
@@ -28,4 +30,25 @@ func filterIngressByClass(ingresses []*v1beta1.Ingress, class string) []*v1beta1
 	}
 
 	return result[:counter]
+}
+
+func watchIngress(fn func()) {
+	var ingress v1beta1.Ingress
+	watcher, err := client.Watch(context.Background(), k8s.AllNamespaces, &ingress)
+	if err != nil {
+		log.Println("Error happened while watching ingresses")
+		log.Println(err)
+	}
+	defer watcher.Close()
+
+	for {
+		ing := new(v1beta1.Ingress)
+		eventType, err := watcher.Next(ing)
+		if err != nil {
+			log.Println("Ingress Watcher encountered an error. Exiting")
+			log.Fatal(err)
+		}
+		log.Println(fmt.Sprintf("EventType: %s, IngressName: %s", eventType, ing.GetMetadata().GetName()))
+		fn()
+	}
 }

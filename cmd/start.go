@@ -52,9 +52,10 @@ func runStart() {
 		log.Fatal(err)
 	}
 
-	go engine.RunOnce()
+	engine.RunOnce()
 
-	go engine.StartWatching()
+	go engine.StartWatchingIngress()
+	go engine.StartWatchingService()
 
 	api.StartServer()
 }

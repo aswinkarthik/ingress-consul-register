@@ -38,3 +38,32 @@ func (s *controllerService) getIpAddress() string {
 func (s *controllerService) getName() string {
 	return *s.service.GetMetadata().Name
 }
+
+func watchService(fn func()) {
+	serviceName := config.ControllerService()
+	namespace := config.ControllerServiceNamespace()
+
+	var service v1.Service
+
+	watcher, err := client.Watch(context.Background(), namespace, &service)
+	if err != nil {
+		log.Println("Error happened while watching service")
+		log.Println(err)
+	}
+
+	defer watcher.Close()
+
+	for {
+		svc := new(v1.Service)
+		eventType, err := watcher.Next(svc)
+
+		if err != nil {
+			log.Println("Service Watcher encountered an error")
+			log.Fatal(err)
+		}
+		log.Println(fmt.Sprintf("EventType: %s, ServiceName: %s", eventType, svc.GetMetadata().GetName()))
+		if svc.GetMetadata().GetName() == serviceName {
+			fn()
+		}
+	}
+}
