@@ -1,0 +1,66 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: {{ template "ingress-consul-register.fullname" . }}
+  labels:
+    app: {{ template "ingress-consul-register.fullname" . }}
+    chart: {{ .Chart.Name }}-{{ .Chart.Version }}
+    heritage: Tiller
+    release: {{ .Release.Name | quote }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ template "ingress-consul-register.fullname" . }}
+  template:
+    metadata:
+      labels:
+        app: {{ template "ingress-consul-register.fullname" . }}
+        chart: {{ .Chart.Name }}-{{ .Chart.Version }}
+        heritage: Tiller
+        release: {{ .Release.Name | quote }}
+    spec:
+      containers:
+      - image: "{{ .Values.Image.Name }}:{{ .Values.Image.Tag }}"
+        args:
+          - /ingress-consul-register
+          - start
+          {{- if .Values.IngressClass }}
+          - --ingress-class
+          - {{ .Values.IngressClass }}
+          {{- end }}
+          {{- if .Values.ConsulControllerService }}
+          - --consul-controller-service
+          - {{ .Values.ConsulControllerService }}
+          {{- end }}
+          {{- if .Values.IngressControllerService }}
+          - --ingress-controller-service
+          - {{ .Values.IngressControllerService }}
+          {{- end }}
+          {{- if .Values.IngressControllerServiceNamespace }}
+          - --ingress-controller-service-namespace
+          - {{ .Values.IngressControllerServiceNamespace }}
+          {{- end }}
+          {{- if .Values.ConsulHost }}
+          - --consul-host
+          - {{ .Values.ConsulHost }}
+          {{- end }}
+          {{- if .Values.ConsulPort }}
+          - --consul-port
+          - {{ .Values.ConsulPort }}
+          {{- end }}
+          {{- if .Values.ConsulDomain }}
+          - --consul-domain
+          - {{ .Values.ConsulDomain }}
+          {{- end }}
+          {{- if .Values.Port }}
+          - --port
+          - {{ .Values.Port }}
+          {{- end }}
+        imagePullPolicy: IfNotPresent
+        name: ingress-consul-register
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30

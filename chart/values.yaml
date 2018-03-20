@@ -1,0 +1,31 @@
+Image:
+  Name: aswinkarthik93/ingress-consul-register
+  Tag: latest
+
+
+## Command line arguments to the binary
+
+## Ingress resources with annotations having the following class to process
+IngressClass: nginx
+
+## The name used to register the ingress controller in Consul
+ConsulControllerService: internal
+
+## The ingress controller service to get the Ip address from (Required)
+IngressControllerService: router-nginx-ingress-controller
+
+## The namespace of the ingress controller service
+# IngressControllerServiceNamespace: default
+
+## The consul agent/service against which registration should be done
+ConsulHost: dns-consul
+
+## To change the port of Consul
+# ConsulPort: 8500
+
+## To specify the domain with which consul is running
+# ConsulDomain: consul
+
+
+## API Port of ingress-controller-service
+# Port: 8080

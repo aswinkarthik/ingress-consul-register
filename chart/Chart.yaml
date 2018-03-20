@@ -1,0 +1,13 @@
+apiVersion: v1
+name: ingress-consul-register
+home: https://github.com/aswinkarthik93/ingress-consul-register.git
+version: 0.1.0
+description: A Tool to register ingress hostnames with the Ingress controller IPs to Consul
+keywords:
+  - consul
+  - ingress
+  - ingress-controller
+  - dns
+maintainers:
+  - name: aswinkarthik93
+    email: aswinkarthik93@gmail.com
