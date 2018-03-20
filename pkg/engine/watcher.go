@@ -22,7 +22,6 @@ func RunOnce() {
 	service := fetchControllerService()
 	c := &consulService{Tags: tags, IpAddress: service.getIpAddress(), Name: config.ConsulControllerService()}
 	log.Println("Following service will be registered in consul")
-	utils.PrettyPrint(c)
 	c.registerToConsul(consulClient)
 }
 
